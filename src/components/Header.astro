@@ -1,0 +1,134 @@
+---
+// En-tête fixe : nom, choix de l'univers, bouton de contact.
+import contact from '../data/contact.json';
+
+interface Props {
+  current: 'home' | 'dev' | 'design';
+}
+const { current } = Astro.props;
+const contactHref = current === 'home' ? contact.whatsapp.url : '#contact';
+---
+
+<header class="top" data-header>
+  <a class="brand" href="/">Samson Klougan<small>Dream Conception, Lomé</small></a>
+  <nav class="switch" aria-label="Choisir un univers">
+    <a href="/developpeur/" aria-current={current === 'dev' ? 'page' : undefined}>Développeur</a>
+    <a href="/graphiste/" aria-current={current === 'design' ? 'page' : undefined}>Graphiste & Com</a>
+  </nav>
+  <a
+    class="cta"
+    href={contactHref}
+    target={current === 'home' ? '_blank' : undefined}
+    rel={current === 'home' ? 'noopener' : undefined}>Me contacter</a
+  >
+</header>
+
+<script>
+  // Fond de l'en-tête quand on fait défiler la page
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  if (header) {
+    const update = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>
+
+<style>
+  .top {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: calc(env(safe-area-inset-top, 0px) + 0.85rem) var(--gutter-r) 0.85rem var(--gutter-l);
+    color: var(--fg);
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  :global(.theme-home) .top {
+    color: var(--craie);
+  }
+  .top.is-scrolled {
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .brand {
+    text-decoration: none;
+    font-weight: 800;
+    font-stretch: 112%;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .brand small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    font-stretch: 100%;
+  }
+  .switch {
+    display: flex;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--soft);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  :global(.theme-home) .switch {
+    background: rgba(20, 25, 56, 0.88);
+  }
+  :global(.theme-home) .cta {
+    background: var(--indigo);
+    border-color: var(--indigo);
+    color: var(--craie);
+  }
+  :global(.theme-home) .cta:hover {
+    background: var(--craie);
+    color: var(--indigo);
+  }
+  .switch a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background-color 0.25s, color 0.25s;
+  }
+  .switch a:hover {
+    background: var(--soft);
+  }
+  .switch a[aria-current='page'] {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  .cta {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    border: 1.5px solid currentColor;
+    transition: background-color 0.25s, color 0.25s;
+  }
+  .cta:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  @media (max-width: 760px) {
+    .cta,
+    .brand small {
+      display: none;
+    }
+    .switch a {
+      padding: 0.45rem 0.75rem;
+      font-size: 0.8rem;
+    }
+  }
+</style>

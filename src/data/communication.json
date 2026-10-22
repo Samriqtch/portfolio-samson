@@ -1,0 +1,30 @@
+[
+  {
+    "titre": "Festival International d'Histoire d'Aného",
+    "type": "Planning éditorial",
+    "badge": "Planning éditorial",
+    "description": "Planning éditorial de l'édition 2026 sur le thème « Partage », du 12 au 15 novembre, avec l'Union européenne en région invitée et Blitta en ville associée : publication quotidienne, 75 % de vidéo et mise en avant des partenaires.",
+    "planches": [
+      "id-fiha-1.jpg"
+    ],
+    "format": "paysage"
+  },
+  {
+    "titre": "Keah Fitness & Gym",
+    "type": "Planning éditorial de 8 semaines",
+    "badge": "61 pages",
+    "description": "Un plan de 56 jours sur TikTok, Instagram, Facebook et WhatsApp : stratégie et objectifs, piliers de contenu, ligne graphique, hashtags, sponsorisation, calendrier jour par jour, scripts vidéo plan par plan et suivi des résultats.",
+    "planches": [
+      "id-keahplan-1.jpg",
+      "id-keahplan-2.jpg",
+      "id-keahplan-3.jpg",
+      "id-keahplan-4.jpg",
+      "id-keahplan-5.jpg",
+      "id-keahplan-6.jpg",
+      "id-keahplan-7.jpg",
+      "id-keahplan-8.jpg",
+      "id-keahplan-9.jpg"
+    ],
+    "format": "paysage"
+  }
+]

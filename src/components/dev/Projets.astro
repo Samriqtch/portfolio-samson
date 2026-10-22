@@ -1,0 +1,181 @@
+---
+// Liste des projets dev. Chaque projet s'ouvre au clic (balise <details>, sans JavaScript).
+// Pour ajouter un projet : src/data/projets.json + l'image dans src/assets/images.
+import { Image } from 'astro:assets';
+import Icon from '../Icon.astro';
+import { img } from '../../lib/images';
+import projets from '../../data/projets.json';
+import contact from '../../data/contact.json';
+---
+
+<section class="section" id="projets">
+  <div class="wrap">
+    <h2 class="sec-title">Projets sélectionnés</h2>
+    <div class="list">
+      {
+        projets.map((p, i) => (
+          <details open={i === 0}>
+            <summary>
+              <span class="kind">{p.type}</span>
+              <h3>
+                {p.titre}
+                {p.enCours && <span class="badge">En cours</span>}
+              </h3>
+              <span class="plus" aria-hidden="true" />
+            </summary>
+            <div class="detail">
+              <div class="info">
+                <p>{p.description}</p>
+                <ul class="tags">
+                  {p.technos.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+                {p.lien && (
+                  <a class="live" href={p.lien} target="_blank" rel="noopener">
+                    Voir le site en ligne <Icon name="arrow-up-right" />
+                  </a>
+                )}
+              </div>
+              {p.image && (
+                <Image
+                  class="shot"
+                  src={img(p.image)}
+                  alt={p.alt ?? p.titre}
+                  widths={[600, 1100]}
+                  sizes="(max-width: 860px) 100vw, 55vw"
+                  loading="lazy"
+                />
+              )}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+    <a class="btn btn-ghost github" href={contact.github} target="_blank" rel="noopener">
+      <Icon name="github" />Voir tous mes projets sur GitHub
+    </a>
+  </div>
+</section>
+
+<style>
+  .list {
+    border-top: 1px solid var(--line);
+  }
+  details {
+    border-bottom: 1px solid var(--line);
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 9rem 1fr auto;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 1.6rem 0;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .kind {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--ciel);
+  }
+  h3 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 700;
+    font-stretch: 90%;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    transition: color 0.25s, transform 0.4s;
+  }
+  summary:hover h3 {
+    color: var(--safran);
+    transform: translateX(0.4rem);
+  }
+  .badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    background: var(--safran);
+    color: var(--indigo);
+  }
+  .plus {
+    position: relative;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    align-self: center;
+  }
+  .plus::before,
+  .plus::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.35s;
+  }
+  .plus::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  details[open] .plus::after {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  .detail {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 1.5rem 2.5rem;
+    padding: 0 0 2.2rem 10.5rem;
+    align-items: start;
+  }
+  .info {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+  .info p {
+    opacity: 0.88;
+    max-width: 52ch;
+  }
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--safran);
+  }
+  .detail :global(.shot) {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--indigo-3);
+  }
+  .github {
+    margin-top: 2.5rem;
+  }
+  @media (max-width: 860px) {
+    summary {
+      grid-template-columns: 1fr auto;
+      gap: 0.4rem 1rem;
+    }
+    .kind {
+      grid-column: 1 / -1;
+    }
+    .detail {
+      grid-template-columns: 1fr;
+      padding-left: 0;
+    }
+  }
+</style>

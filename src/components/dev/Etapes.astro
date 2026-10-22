@@ -1,0 +1,76 @@
+---
+// « Comment je travaille » : les trois étapes d'un projet.
+import Icon from '../Icon.astro';
+import { background, lazyBackground } from '../../lib/images';
+import textes from '../../data/textes.json';
+
+const bg = await background('bg-dev-wall.jpg');
+const icones = ['compass', 'code-xml', 'rocket'];
+---
+
+<section class="section steps" {...lazyBackground(bg)}>
+  <div class="wrap">
+    <h2 class="sec-title">Comment je travaille</h2>
+    <ol class="grid">
+      {
+        textes.dev.etapes.map((e, i) => (
+          <li>
+            <span class="n">
+              <Icon name={icones[i] ?? 'sparkles'} />
+              étape {i + 1}
+            </span>
+            <h3>{e.titre}</h3>
+            <p>{e.texte}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps {
+    background-image:
+      linear-gradient(180deg, var(--indigo) 0%, rgba(20, 25, 56, 0.86) 30%, rgba(20, 25, 56, 0.86) 70%, var(--indigo) 100%),
+      var(--bg-lg);
+    background-size: cover;
+    background-position: center 30%;
+  }
+  .grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+  .n {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ciel);
+  }
+  .n :global(.icon) {
+    width: 1.3rem;
+    height: 1.3rem;
+    color: var(--safran);
+  }
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  p {
+    opacity: 0.85;
+  }
+  @media (max-width: 860px) {
+    .steps {
+      background-image: linear-gradient(180deg, var(--indigo), rgba(20, 25, 56, 0.9), var(--indigo)), var(--bg-sm);
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+// Formes géométriques qui flottent derrière la page graphiste.
+// Seulement sur ordinateur : sur téléphone, l'animation est désactivée pour économiser la batterie.
+---
+
+<canvas class="fond" data-fond aria-hidden="true"></canvas>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-fond]');
+  const desktop = matchMedia('(min-width: 861px)').matches;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (canvas && desktop && !reduce) {
+    const ctx = canvas.getContext('2d')!;
+    const types = ['disc', 'ring', 'square', 'petal', 'dot', 'line'] as const;
+    let w = 0, h = 0, mx = 0, my = 0, running = true;
+    type Shape = { type: (typeof types)[number]; x: number; y: number; size: number; depth: number; speed: number; phase: number; rot: number; spin: number; light: boolean };
+    let shapes: Shape[] = [];
+
+    const resize = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      w = innerWidth;
+      h = innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      shapes = Array.from({ length: 20 }, (_, i) => ({
+        type: types[i % types.length],
+        x: Math.random() * w,
+        y: Math.random() * h,
+        size: 14 + Math.random() * 110,
+        depth: 0.2 + Math.random() * 0.8,
+        speed: 0.15 + Math.random() * 0.35,
+        phase: Math.random() * Math.PI * 2,
+        rot: Math.random() * Math.PI,
+        spin: (Math.random() - 0.5) * 0.004,
+        light: Math.random() < 0.35,
+      }));
+    };
+
+    const draw = (s: Shape, t: number) => {
+      const col = s.light ? '245,244,240' : '20,25,56';
+      const a = s.light ? 0.4 : 0.12 + s.depth * 0.1;
+      const r = s.size / 2;
+      ctx.save();
+      ctx.translate(
+        s.x + Math.sin(t * 0.0012 * s.speed + s.phase) * 30 - mx * 40 * s.depth,
+        s.y + Math.cos(t * 0.0009 * s.speed + s.phase) * 24 - my * 40 * s.depth,
+      );
+      ctx.rotate(s.rot);
+      ctx.fillStyle = `rgba(${col},${a})`;
+      ctx.strokeStyle = `rgba(${col},${a + 0.1})`;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      if (s.type === 'disc') { ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill(); }
+      else if (s.type === 'ring') { ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.stroke(); }
+      else if (s.type === 'square') { ctx.strokeRect(-r, -r, s.size, s.size); }
+      else if (s.type === 'petal') { ctx.moveTo(0, r); ctx.arc(0, 0, r, Math.PI / 2, Math.PI * 2); ctx.lineTo(r, r); ctx.closePath(); ctx.fill(); }
+      else if (s.type === 'dot') { ctx.arc(0, 0, Math.max(4, r * 0.2), 0, Math.PI * 2); ctx.fill(); }
+      else { ctx.moveTo(-r, 0); ctx.lineTo(r, 0); ctx.stroke(); }
+      ctx.restore();
+    };
+
+    const frame = (t: number) => {
+      if (!running) return;
+      ctx.clearRect(0, 0, w, h);
+      for (const s of shapes) {
+        s.rot += s.spin;
+        s.y -= s.speed * 0.25;
+        if (s.y < -s.size * 2) { s.y = h + s.size; s.x = Math.random() * w; }
+        draw(s, t);
+      }
+      requestAnimationFrame(frame);
+    };
+
+    addEventListener('resize', resize);
+    addEventListener('pointermove', (e) => { mx = e.clientX / w - 0.5; my = e.clientY / h - 0.5; });
+    // Pause quand l'onglet n'est pas visible
+    document.addEventListener('visibilitychange', () => {
+      running = !document.hidden;
+      if (running) requestAnimationFrame(frame);
+    });
+    resize();
+    requestAnimationFrame(frame);
+  }
+</script>
+
+<style>
+  .fond {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+  @media (max-width: 860px) {
+    .fond {
+      display: none;
+    }
+  }
+</style>

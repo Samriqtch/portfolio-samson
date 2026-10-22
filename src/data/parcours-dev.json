@@ -1,0 +1,98 @@
+{
+  "experiences": [
+    {
+      "date": "Mai 2026, aujourd'hui",
+      "titre": "Développeur web",
+      "lieu": "Maison du Tourisme d'Aného",
+      "description": "Conception et développement d'une plateforme de gestion des activités touristiques et culturelles.",
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "Mai à juillet 2024",
+      "titre": "Développeur web",
+      "lieu": "ZelixGroup",
+      "description": "Front-end d'une application d'import-export : maquettes Figma, puis développement Angular (formulaires, composants, gestion d'état).",
+      "enCours": false,
+      "technos": [
+        "Angular",
+        "Figma"
+      ]
+    },
+    {
+      "date": "Janvier à mars 2024",
+      "titre": "Développeur web et mobile",
+      "lieu": "Boomercall",
+      "description": "Site Boomercall en Next.js, front et back, et participation au front de l'application mobile de suivi des commandes.",
+      "enCours": false,
+      "technos": [
+        "Next.js"
+      ]
+    },
+    {
+      "date": "Septembre à décembre 2023",
+      "titre": "Développeur web et mobile",
+      "lieu": "Woelabs HubCity",
+      "description": "Application mobile de gestion des utilisateurs, puis système de suivi de l'utilisation des applications : cahier des charges, UML, base de données et tableau de bord.",
+      "enCours": false,
+      "technos": [
+        "Flutter",
+        "Nest.js",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "date": "Mai à juillet 2022",
+      "titre": "Développeur web",
+      "lieu": "A2B Tech",
+      "description": "Application de location de maisons et de véhicules, avec une interface réactive centrée sur l'expérience client.",
+      "enCours": false,
+      "technos": [
+        "React",
+        "TypeScript"
+      ]
+    }
+  ],
+  "formation": [
+    {
+      "date": "Janvier 2026, aujourd'hui",
+      "titre": "Master Systèmes d'information et développement full stack",
+      "lieu": "Lomé Business School (LBS), Lomé",
+      "description": null,
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "2024 à 2025",
+      "titre": "1re année de cycle ingénieur en génie informatique",
+      "lieu": "École Marocaine d'Ingénierie (EMG), Rabat",
+      "description": null,
+      "enCours": false,
+      "technos": []
+    },
+    {
+      "date": "2020 à 2023",
+      "titre": "Licence professionnelle en informatique, génie logiciel et systèmes d'information",
+      "lieu": "Institut Africain d'Informatique (IAI-Togo), Lomé",
+      "description": null,
+      "enCours": false,
+      "technos": []
+    },
+    {
+      "date": "2019 à 2020",
+      "titre": "Une année en économie et gestion",
+      "lieu": "UCAO-UUT, Lomé",
+      "description": null,
+      "enCours": false,
+      "technos": []
+    },
+    {
+      "date": "2017 à 2019",
+      "titre": "Baccalauréat scientifique série C4",
+      "lieu": "Collège Protestant Lomé-Tokoin, Lomé",
+      "description": null,
+      "enCours": false,
+      "technos": []
+    }
+  ]
+}

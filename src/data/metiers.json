@@ -1,0 +1,27 @@
+[
+  {
+    "titre": "Community manager",
+    "texte": "Stratégie et ligne éditoriale, planning de publication, création des contenus, gestion de la communauté et suivi des statistiques sur Facebook, Instagram, TikTok, LinkedIn, X et WhatsApp.",
+    "icone": "megaphone"
+  },
+  {
+    "titre": "Graphiste",
+    "texte": "Affiches, flyers, kakémonos, logos, identités visuelles et visuels pour les réseaux sociaux.",
+    "icone": "palette"
+  },
+  {
+    "titre": "Vidéaste",
+    "texte": "Tournage de spots, de portraits et couverture d'événements, du début à la fin de la journée.",
+    "icone": "video"
+  },
+  {
+    "titre": "Monteur vidéo",
+    "texte": "Montage, motion design, sous-titres et formats courts prêts à publier.",
+    "icone": "clapperboard"
+  },
+  {
+    "titre": "Et aussi",
+    "texte": "Formations aux outils digitaux et à l'IA, brochures et présentations.",
+    "icone": "sparkles"
+  }
+]

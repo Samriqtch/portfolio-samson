@@ -1,0 +1,134 @@
+---
+// Galerie d'affiches en mosaïque. Les 12 premières sont visibles, un bouton affiche les autres.
+// Pour ajouter une affiche : src/data/affiches.json + l'image dans src/assets/images.
+import { Image } from 'astro:assets';
+import Icon from '../Icon.astro';
+import { img, optimized } from '../../lib/images';
+import affiches from '../../data/affiches.json';
+import contact from '../../data/contact.json';
+
+const VISIBLES = 12;
+const gallery = await Promise.all(
+  affiches.map(async (a) => ({
+    src: await optimized(a.image, 1200, 75),
+    alt: `${a.client}, ${a.type}`,
+    cap: `${a.client}, ${a.type}`,
+  })),
+);
+---
+
+<section class="section" id="affiches">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title">Affiches & visuels</h2>
+      <a class="btn btn-main" href={contact.behance} target="_blank" rel="noopener">
+        <Icon name="behance" />Voir tout mon travail sur Behance
+      </a>
+    </div>
+
+    <div class="masonry" data-masonry>
+      {
+        affiches.map((a, i) => (
+          <figure class:list={['item', { extra: i >= VISIBLES }]}>
+            <button type="button" data-gallery="affiches" data-index={i} aria-label={`Agrandir : ${a.client}, ${a.type}`}>
+              <Image
+                src={img(a.image)}
+                alt={`${a.client}, ${a.type}`}
+                widths={[360, 640]}
+                sizes="(max-width: 600px) 50vw, (max-width: 1100px) 33vw, 25vw"
+                loading="lazy"
+              />
+            </button>
+            <figcaption>
+              <strong>{a.client}</strong>
+              <span>{a.type}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    {
+      affiches.length > VISIBLES && (
+        <div class="more">
+          <button type="button" class="btn btn-ghost" data-more aria-expanded="false">
+            Afficher toutes les affiches ({affiches.length})
+          </button>
+        </div>
+      )
+    }
+    <script is:inline type="application/json" data-gallery-id="affiches" set:html={JSON.stringify(gallery)} />
+  </div>
+</section>
+
+<script>
+  const grid = document.querySelector<HTMLElement>('[data-masonry]');
+  const more = document.querySelector<HTMLButtonElement>('[data-more]');
+  if (grid && more) {
+    const label = more.textContent;
+    more.addEventListener('click', () => {
+      const open = grid.classList.toggle('show-all');
+      more.setAttribute('aria-expanded', String(open));
+      more.textContent = open ? 'Afficher moins d’affiches' : label;
+    });
+  }
+</script>
+
+<style>
+  .masonry {
+    columns: 4 220px;
+    column-gap: clamp(0.8rem, 1.6vw, 1.4rem);
+  }
+  .item {
+    break-inside: avoid;
+    margin-bottom: clamp(0.8rem, 1.6vw, 1.4rem);
+  }
+  .item.extra {
+    display: none;
+  }
+  .masonry:global(.show-all) .item.extra {
+    display: block;
+  }
+  .item button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: zoom-in;
+    background: var(--indigo);
+    box-shadow: 0 0 0 2px var(--indigo);
+  }
+  .item button :global(img) {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s var(--ease);
+  }
+  .item button:hover :global(img) {
+    transform: scale(1.04);
+  }
+  figcaption {
+    padding: 0.6rem 0.2rem 0;
+    font-size: 0.88rem;
+    line-height: 1.3;
+  }
+  figcaption strong {
+    display: block;
+    font-size: 0.98rem;
+  }
+  .more {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .more .btn {
+    background: transparent;
+    cursor: pointer;
+  }
+  @media (max-width: 600px) {
+    .masonry {
+      columns: 2;
+    }
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+// Bandeau qui défile avec les types de réalisations.
+import textes from '../../data/textes.json';
+const mots = textes.design.bandeau;
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    {[...mots, ...mots].map((m) => <span>{m}</span>)}
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    padding-block: 1.1rem;
+    background: var(--indigo);
+    color: var(--safran);
+  }
+  .track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    white-space: nowrap;
+    font-weight: 800;
+    font-stretch: 115%;
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    letter-spacing: -0.02em;
+    animation: slide 38s linear infinite;
+  }
+  span::after {
+    content: '✦';
+    margin-left: 3rem;
+    color: var(--craie);
+  }
+  @keyframes slide {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

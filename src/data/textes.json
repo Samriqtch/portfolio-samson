@@ -1,0 +1,111 @@
+{
+  "accueil": {
+    "dev": {
+      "titre": "Je code.",
+      "texte": "Sites web sur mesure, applications de gestion, WordPress. Des outils qui tournent vraiment, pour de vraies entreprises.",
+      "lien": "Voir le côté dev"
+    },
+    "design": {
+      "titre": "Je crée.",
+      "texte": "Graphisme, montage vidéo, motion design et community management. Des visuels qui donnent envie de s'arrêter.",
+      "lien": "Voir le côté créatif"
+    }
+  },
+  "dev": {
+    "intro": "Développeur web à Lomé. Je conçois des sites rapides et des applications de gestion pensées pour le terrain : boutiques, salles de sport, sites touristiques, événements.",
+    "services": [
+      "sites vitrines sur mesure",
+      "applis de gestion (stock, ventes)",
+      "WordPress & ACF",
+      "PWA installables sur tablette"
+    ],
+    "etapes": [
+      {
+        "titre": "On cadre le besoin",
+        "texte": "On définit ensemble qui utilise l'outil, ce qu'il doit faire et ce qui compte vraiment pour votre activité."
+      },
+      {
+        "titre": "Je conçois et je code",
+        "texte": "Maquette, développement en local, tests réguliers avec vous. Vous voyez le projet avancer."
+      },
+      {
+        "titre": "Je mets en ligne",
+        "texte": "Déploiement, nom de domaine, prise en main de l'outil et suivi après le lancement."
+      }
+    ],
+    "apropos": {
+      "intro": "Je m'appelle Samson Klougan, fondateur de Dream Conception à Lomé.",
+      "texte": "Je viens aussi du design et de la communication, ce qui change ma façon de coder : je pense d'abord à la personne qui utilisera l'outil. Après une licence en génie logiciel à l'IAI-Togo et une année de cycle ingénieur à Rabat, je prépare un Master en systèmes d'information et développement full stack à Lomé Business School. Je construis des sites et des applications simples à utiliser, solides et faciles à faire évoluer.",
+      "faits": [
+        {
+          "titre": "5 stages",
+          "texte": "et missions en entreprise depuis 2022"
+        },
+        {
+          "titre": "Master SI",
+          "texte": "et développement full stack, en cours"
+        },
+        {
+          "titre": "2 en 1",
+          "texte": "design et code au même endroit"
+        }
+      ],
+      "photo": "photo-samson.jpg",
+      "alt": "Samson Klougan, développeur web à Lomé"
+    },
+    "contact": {
+      "titre": "Un projet à coder ?",
+      "texte": "Écrivez-moi sur WhatsApp, je réponds rapidement avec une première estimation.",
+      "passerelle": {
+        "titre": "Besoin aussi de visuels ?",
+        "lien": "Découvrir le côté graphiste"
+      }
+    }
+  },
+  "design": {
+    "intro": "Graphiste, community manager, vidéaste et monteur vidéo à Lomé. Je donne une image forte aux marques et aux événements, et je fais grandir leurs pages sur les réseaux.",
+    "roles": [
+      "Graphiste",
+      "Community manager",
+      "Vidéaste",
+      "Monteur vidéo"
+    ],
+    "bandeau": [
+      "Affiches",
+      "Identités visuelles",
+      "Reels & TikTok",
+      "Spots vidéo",
+      "Planning éditorial",
+      "Couverture d'événements",
+      "Motion design"
+    ],
+    "apropos": {
+      "intro": "Je m'appelle Samson Klougan, je dirige Dream Conception à Lomé.",
+      "texte": "Je crée les visuels, je tourne et je monte les vidéos, puis je les publie et j'anime la communauté. Avoir toute la chaîne entre les mêmes mains, c'est un message cohérent du premier visuel jusqu'aux résultats.",
+      "faits": [
+        {
+          "titre": "4 métiers",
+          "texte": "graphisme, CM, tournage, montage"
+        },
+        {
+          "titre": "6 réseaux",
+          "texte": "gérés au quotidien"
+        },
+        {
+          "titre": "Depuis 2020",
+          "texte": "graphiste indépendant"
+        }
+      ],
+      "photo": "photo-samson-design.jpg",
+      "alt": "Samson Klougan, graphiste et community manager à Lomé"
+    },
+    "contact": {
+      "titre": "Faisons parler de vous.",
+      "texte": "Une affiche, une campagne, une vidéo, un événement à couvrir ? Envoyez-moi un message.",
+      "passerelle": {
+        "titre": "Besoin d'un site ou d'une appli ?",
+        "lien": "Découvrir le côté développeur"
+      }
+    }
+  }
+}

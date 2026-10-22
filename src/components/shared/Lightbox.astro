@@ -1,0 +1,144 @@
+---
+// Visionneuse plein écran, partagée par les galeries de la page.
+// Un bouton ouvre une galerie avec data-gallery="nom" et data-index="0".
+// Les images de chaque galerie sont listées dans <script type="application/json" data-gallery-id="nom">.
+import Icon from '../Icon.astro';
+---
+
+<dialog class="lightbox" data-lightbox aria-label="Aperçu en grand">
+  <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Fermer"><Icon name="x" /></button>
+  <button type="button" class="lb-btn lb-prev" data-lb-prev aria-label="Image précédente"><Icon name="chevron-left" /></button>
+  <figure>
+    <img data-lb-img alt="" />
+    <figcaption data-lb-cap></figcaption>
+  </figure>
+  <button type="button" class="lb-btn lb-next" data-lb-next aria-label="Image suivante"><Icon name="chevron-right" /></button>
+</dialog>
+
+<script>
+  type Item = { src: string; alt: string; cap: string };
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+  if (dialog) {
+    const image = dialog.querySelector<HTMLImageElement>('[data-lb-img]')!;
+    const caption = dialog.querySelector<HTMLElement>('[data-lb-cap]')!;
+    const galleries = new Map<string, Item[]>();
+    document.querySelectorAll<HTMLScriptElement>('script[data-gallery-id]').forEach((s) => {
+      galleries.set(s.dataset.galleryId!, JSON.parse(s.textContent || '[]'));
+    });
+    let items: Item[] = [];
+    let index = 0;
+
+    const show = (i: number) => {
+      index = (i + items.length) % items.length;
+      const item = items[index];
+      image.src = item.src;
+      image.alt = item.alt;
+      caption.textContent = item.cap;
+      dialog.querySelectorAll<HTMLElement>('[data-lb-prev],[data-lb-next]').forEach((b) => (b.hidden = items.length < 2));
+    };
+
+    document.addEventListener('click', (event) => {
+      const trigger = (event.target as HTMLElement).closest<HTMLElement>('[data-gallery]');
+      if (!trigger) return;
+      const list = galleries.get(trigger.dataset.gallery!);
+      if (!list || !list.length) return;
+      items = list;
+      show(Number(trigger.dataset.index || 0));
+      dialog.showModal();
+    });
+
+    dialog.querySelector('[data-lb-close]')!.addEventListener('click', () => dialog.close());
+    dialog.querySelector('[data-lb-prev]')!.addEventListener('click', () => show(index - 1));
+    dialog.querySelector('[data-lb-next]')!.addEventListener('click', () => show(index + 1));
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+  }
+</script>
+
+<style>
+  .lightbox {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: calc(env(safe-area-inset-top, 0px) + 3.5rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+    border: 0;
+    background: rgba(10, 13, 34, 0.94);
+    color: var(--craie);
+  }
+  .lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .lightbox::backdrop {
+    background: transparent;
+  }
+  figure {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+  figure img {
+    max-width: min(100%, 1100px);
+    max-height: calc(100% - 2.5rem);
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  figcaption {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .lb-btn {
+    flex: none;
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--craie);
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .lb-btn:hover {
+    background: var(--safran);
+    color: var(--indigo);
+  }
+  .lb-btn :global(.icon) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .lb-close {
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 1rem);
+    right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+  @media (max-width: 760px) {
+    .lb-prev,
+    .lb-next {
+      position: absolute;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+    }
+    .lb-prev {
+      left: 1rem;
+    }
+    .lb-next {
+      right: 1rem;
+    }
+  }
+</style>

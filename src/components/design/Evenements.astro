@@ -1,0 +1,96 @@
+---
+// Événements couverts, sur le visuel du FIHA.
+import { Image } from 'astro:assets';
+import { img, background, lazyBackground } from '../../lib/images';
+import evenements from '../../data/evenements.json';
+
+const bg = await background('bg-events.jpg', 1400, 800);
+---
+
+<section class="section band on-dark" id="evenements" {...lazyBackground(bg)}>
+  <div class="wrap">
+    <h2 class="sec-title">Couverture d'événements</h2>
+    <p class="lead intro">Photos, vidéos et contenus en direct pour faire vivre l'événement sur les réseaux, avant, pendant et après.</p>
+    <ul class="events">
+      {
+        evenements.map((e) => (
+          <li>
+            <span class="year">{e.annee}</span>
+            <div>
+              <strong>{e.nom}</strong>
+              {e.detail && <small>{e.detail}</small>}
+            </div>
+            {e.image && <Image src={img(e.image)} alt={e.alt ?? e.nom} width={180} loading="lazy" />}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .band {
+    background-image: linear-gradient(180deg, rgba(20, 25, 56, 0.78), rgba(20, 25, 56, 0.9)), var(--bg-lg);
+    background-color: var(--indigo);
+    background-size: cover;
+    background-position: center;
+  }
+  .intro {
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .events {
+    list-style: none;
+    padding: 0;
+    border-top: 2px solid var(--line);
+  }
+  li {
+    display: grid;
+    grid-template-columns: 5rem 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .year {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--safran);
+  }
+  strong {
+    display: block;
+    font-size: clamp(1.5rem, 3.6vw, 2.8rem);
+    font-weight: 800;
+    font-stretch: 105%;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  small {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+  li :global(img) {
+    height: 4.5rem;
+    width: auto;
+    border-radius: 8px;
+    background: #fff;
+    padding: 0.25rem;
+  }
+  @media (max-width: 860px) {
+    .band {
+      background-image: linear-gradient(180deg, rgba(20, 25, 56, 0.82), rgba(20, 25, 56, 0.92)), var(--bg-sm);
+    }
+    li {
+      grid-template-columns: 1fr auto;
+      gap: 0.4rem 1rem;
+    }
+    .year {
+      grid-column: 1 / -1;
+    }
+    li :global(img) {
+      height: 3.5rem;
+    }
+  }
+</style>

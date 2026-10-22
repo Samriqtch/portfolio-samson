@@ -1,0 +1,125 @@
+---
+// Grille de projets présentés en planches (identités visuelles, plannings…).
+// Un clic ouvre toutes les planches du projet dans la visionneuse.
+import { Image } from 'astro:assets';
+import { img, optimized } from '../../lib/images';
+
+interface Case {
+  titre: string;
+  type: string;
+  badge: string;
+  description: string;
+  planches: string[];
+  format: 'paysage' | 'portrait';
+}
+interface Props {
+  id: string;
+  items: Case[];
+}
+const { id, items } = Astro.props;
+
+const galleries = await Promise.all(
+  items.map(async (c) =>
+    Promise.all(
+      c.planches.map(async (p, i) => ({
+        src: await optimized(p, 1400, 75),
+        alt: `${c.titre}, planche ${i + 1}`,
+        cap: `${c.titre}, ${i + 1} sur ${c.planches.length}`,
+      })),
+    ),
+  ),
+);
+---
+
+<div class="cases">
+  {
+    items.map((c, n) => (
+      <article class:list={['case', { portrait: c.format === 'portrait' }]}>
+        <button type="button" class="open" data-gallery={`${id}-${n}`} data-index="0" aria-label={`Voir les planches : ${c.titre}`}>
+          <Image src={img(c.planches[0])} alt={c.titre} widths={[600, 1000]} sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" />
+          <span class="badge">{c.badge}</span>
+        </button>
+        <div class="cap">
+          <h3>{c.titre}</h3>
+          <span>{c.type}</span>
+        </div>
+        <p>{c.description}</p>
+        <script is:inline type="application/json" data-gallery-id={`${id}-${n}`} set:html={JSON.stringify(galleries[n])} />
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .cases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.4rem, 3vw, 2.2rem) clamp(1rem, 2vw, 1.6rem);
+  }
+  .case {
+    min-width: 0;
+  }
+  .open {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: zoom-in;
+    background: var(--indigo);
+    box-shadow: 0 0 0 2px var(--indigo);
+  }
+  .open :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+  .portrait .open :global(img) {
+    object-fit: contain;
+  }
+  .open:hover :global(img) {
+    transform: scale(1.04);
+  }
+  .badge {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: var(--safran);
+    color: var(--indigo);
+  }
+  .cap {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 0.2rem 0;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .cap span {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    text-align: right;
+  }
+  p {
+    font-size: 0.95rem;
+    max-width: 56ch;
+    padding: 0.4rem 0.2rem 0;
+    opacity: 0.85;
+  }
+  @media (max-width: 860px) {
+    .cases {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

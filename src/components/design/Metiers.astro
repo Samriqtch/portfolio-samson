@@ -1,0 +1,125 @@
+---
+// Les quatre métiers (et le reste), en cartes de tailles différentes.
+import Icon from '../Icon.astro';
+import metiers from '../../data/metiers.json';
+---
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="sec-title">Quatre métiers, un seul interlocuteur</h2>
+    <div class="grid">
+      {
+        metiers.map((m, i) => (
+          <div class={`card c${i + 1}`}>
+            {m.icone && <Icon name={m.icone} class="card-icon" />}
+            <div>
+              <h3>{m.titre}</h3>
+              <p>{m.texte}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.4rem;
+    min-height: 14rem;
+    padding: clamp(1.4rem, 2.5vw, 2.2rem);
+    border-radius: 22px;
+  }
+  .card :global(.card-icon) {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+  h3 {
+    font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+  p {
+    margin-top: 0.9rem;
+    max-width: 40ch;
+    font-size: 0.98rem;
+  }
+  /* Carte 1 : la plus grande (community manager) */
+  .c1 {
+    grid-column: span 6;
+    background: var(--indigo);
+    color: var(--craie);
+  }
+  .c1 h3 {
+    color: var(--safran);
+    font-stretch: 120%;
+    font-size: clamp(2rem, 4vw, 3.6rem);
+  }
+  .c2,
+  .c3,
+  .c4 {
+    grid-column: span 2;
+  }
+  .c2 {
+    background: var(--indigo-3);
+    color: var(--craie);
+  }
+  .c3 {
+    background: var(--craie);
+  }
+  .c4 {
+    background: var(--safran-2);
+  }
+  /* Carte 5 : bandeau « Et aussi » */
+  .c5 {
+    grid-column: span 6;
+    min-height: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid var(--indigo);
+  }
+  .c5 > div {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .c5 p {
+    margin-top: 0;
+    max-width: none;
+  }
+  .c5 :global(.card-icon) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  @media (max-width: 860px) {
+    .c2,
+    .c3,
+    .c4 {
+      grid-column: span 3;
+      min-height: 12rem;
+    }
+    .c4 {
+      grid-column: span 6;
+    }
+    .c5 > div {
+      gap: 0.5rem;
+    }
+  }
+  @media (max-width: 520px) {
+    .c2,
+    .c3 {
+      grid-column: span 6;
+    }
+  }
+</style>

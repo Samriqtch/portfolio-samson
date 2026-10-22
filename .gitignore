@@ -1,0 +1,13 @@
+# Dépendances et fichiers générés
+node_modules/
+dist/
+.astro/
+
+# Fichiers de configuration locaux (mots de passe, clés…)
+.env
+.env.*
+
+# Système
+.DS_Store
+Thumbs.db
+*.log

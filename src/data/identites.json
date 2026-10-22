@@ -1,0 +1,80 @@
+[
+  {
+    "titre": "E.P.P.",
+    "type": "Identité visuelle",
+    "badge": "11 planches",
+    "description": "Logo et charte pour une entreprise de solutions industrielles et de maintenance : déclinaisons, cartes de visite, enseigne, camion, casques et tenues.",
+    "planches": [
+      "id-epp-1.jpg",
+      "id-epp-2.jpg",
+      "id-epp-3.jpg",
+      "id-epp-4.jpg",
+      "id-epp-5.jpg",
+      "id-epp-6.jpg",
+      "id-epp-7.jpg",
+      "id-epp-8.jpg",
+      "id-epp-9.jpg",
+      "id-epp-10.jpg",
+      "id-epp-11.jpg"
+    ],
+    "format": "paysage"
+  },
+  {
+    "titre": "Transformation Training",
+    "type": "Identité visuelle",
+    "badge": "12 planches",
+    "description": "Logo d'un centre de formation, pensé autour du mouvement et de la progression, avec ses déclinaisons, goodies, tenues et page Facebook.",
+    "planches": [
+      "id-tt-1.jpg",
+      "id-tt-2.jpg",
+      "id-tt-3.jpg",
+      "id-tt-4.jpg",
+      "id-tt-5.jpg",
+      "id-tt-6.jpg",
+      "id-tt-7.jpg",
+      "id-tt-8.jpg",
+      "id-tt-9.jpg",
+      "id-tt-10.jpg",
+      "id-tt-11.jpg",
+      "id-tt-12.jpg"
+    ],
+    "format": "paysage"
+  },
+  {
+    "titre": "DODOE Express Delivery",
+    "type": "Identité visuelle",
+    "badge": "12 planches",
+    "description": "Identité complète d'un service de livraison à Lomé : logo, palette, motifs, supports promotionnels, documents et grille tarifaire.",
+    "planches": [
+      "id-dodoe-1.jpg",
+      "id-dodoe-2.jpg",
+      "id-dodoe-3.jpg",
+      "id-dodoe-4.jpg",
+      "id-dodoe-5.jpg",
+      "id-dodoe-6.jpg",
+      "id-dodoe-7.jpg",
+      "id-dodoe-8.jpg",
+      "id-dodoe-9.jpg",
+      "id-dodoe-10.jpg",
+      "id-dodoe-11.jpg",
+      "id-dodoe-12.jpg"
+    ],
+    "format": "paysage"
+  },
+  {
+    "titre": "Lance ton business Chine Afrique",
+    "type": "Mise en page d'ebook",
+    "badge": "7 planches",
+    "description": "Conception d'un guide de 22 pages pour Chantale Amadote : couverture, chapitres, offre et pages intérieures.",
+    "planches": [
+      "id-ebook-1.jpg",
+      "id-ebook-2.jpg",
+      "id-ebook-3.jpg",
+      "id-ebook-4.jpg",
+      "id-ebook-5.jpg",
+      "id-ebook-6.jpg",
+      "id-ebook-7.jpg"
+    ],
+    "format": "portrait"
+  }
+]

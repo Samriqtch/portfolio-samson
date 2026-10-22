@@ -1,0 +1,30 @@
+[
+  {
+    "annee": "2026",
+    "nom": "Immersion Epe Ekpe",
+    "detail": "Grand concert au stade Boka d'Aného",
+    "image": "ev-epeekpe.jpg",
+    "alt": "Affiche du grand concert Immersion Epe Ekpe 2026"
+  },
+  {
+    "annee": "2026",
+    "nom": "Biashara Afrika",
+    "detail": null,
+    "image": "ev-biashara.jpg",
+    "alt": "Logo de Biashara Afrika 2026"
+  },
+  {
+    "annee": "2026",
+    "nom": "Festival Mangal",
+    "detail": "2e édition, Grand-Popo (Bénin)",
+    "image": "ev-mangal.jpg",
+    "alt": "Visuel du Festival Mangal 2026"
+  },
+  {
+    "annee": "2026",
+    "nom": "Conférence sur le festival du Fa",
+    "detail": null,
+    "image": "ev-fa.jpg",
+    "alt": "Œuvre présentée lors de la conférence sur le festival du Fa"
+  }
+]

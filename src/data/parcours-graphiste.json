@@ -1,0 +1,103 @@
+{
+  "experiences": [
+    {
+      "date": "Mai 2026, aujourd'hui",
+      "titre": "Chargé de communication",
+      "lieu": "Maison du Tourisme d'Aného",
+      "description": "Création de contenus, animation des réseaux sociaux et valorisation des activités touristiques.",
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "Avril 2026, aujourd'hui",
+      "titre": "Graphiste et community manager",
+      "lieu": "Keah Fitness & Gym",
+      "description": "Gestion des réseaux sociaux, visuels promotionnels et développement de la visibilité de la salle.",
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "Décembre 2025, aujourd'hui",
+      "titre": "Graphiste et community manager",
+      "lieu": "Mobile Home Togo",
+      "description": "Contenus promotionnels et gestion des réseaux pour mettre en avant les produits de la boutique.",
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "Décembre 2025, aujourd'hui",
+      "titre": "Graphiste et community manager",
+      "lieu": "Elixir du Terroir",
+      "description": "Animation des réseaux et contenus réguliers autour des produits naturels de la marque.",
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "Juillet 2020, aujourd'hui",
+      "titre": "Graphiste indépendant",
+      "lieu": "Dream Conception",
+      "description": "Affiches et supports visuels sur mesure pour des clients au Togo et à distance.",
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "Juillet 2024 à février 2025",
+      "titre": "Graphiste indépendant",
+      "lieu": "MJ Group",
+      "description": "Supports graphiques pour la communication et l'événementiel, visuels publicitaires.",
+      "enCours": false,
+      "technos": []
+    },
+    {
+      "date": "Septembre à décembre 2023",
+      "titre": "Graphiste indépendant",
+      "lieu": "Kora Immigration",
+      "description": "Visuels et vidéos pour renforcer l'identité et la visibilité de l'agence.",
+      "enCours": false,
+      "technos": []
+    },
+    {
+      "date": "Septembre à décembre 2023",
+      "titre": "Community manager et graphiste",
+      "lieu": "Woelabs HubCity",
+      "description": "Gestion de la présence en ligne, contenus adaptés à chaque plateforme et animation des communautés.",
+      "enCours": false,
+      "technos": []
+    }
+  ],
+  "formation": [
+    {
+      "date": "Janvier 2026, aujourd'hui",
+      "titre": "Master 1 Systèmes d'information",
+      "lieu": "Lomé Business School (LBS), Lomé",
+      "description": null,
+      "enCours": true,
+      "technos": []
+    },
+    {
+      "date": "2020 à 2023",
+      "titre": "Licence professionnelle en informatique",
+      "lieu": "Institut Africain d'Informatique (IAI-Togo), Lomé",
+      "description": null,
+      "enCours": false,
+      "technos": []
+    },
+    {
+      "date": "2017 à 2019",
+      "titre": "Baccalauréat scientifique série C4",
+      "lieu": "Collège Protestant Lomé-Tokoin, Lomé",
+      "description": null,
+      "enCours": false,
+      "technos": []
+    }
+  ],
+  "outils": [
+    "Photoshop",
+    "Canva",
+    "CapCut",
+    "Facebook Ads",
+    "Meta Business Suite",
+    "Word, Excel, PowerPoint",
+    "ChatGPT, Claude, Grok"
+  ]
+}

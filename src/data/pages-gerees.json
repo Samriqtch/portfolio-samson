@@ -1,0 +1,71 @@
+{
+  "intro": "Quelques comptes dont je gère la communication. Chiffres tirés des statistiques Meta et TikTok d'août à octobre 2026.",
+  "resultats": [
+    {
+      "valeur": "9 M+",
+      "texte": "vues en deux mois, toutes pages confondues"
+    },
+    {
+      "valeur": "228 K+",
+      "texte": "j'aime sur TikTok en 60 jours"
+    },
+    {
+      "valeur": "1 M",
+      "texte": "vues de vidéos et reels sur une page Facebook en un mois"
+    },
+    {
+      "valeur": "746",
+      "texte": "conversations clients démarrées en un mois"
+    }
+  ],
+  "pages": [
+    {
+      "nom": "Maison du Tourisme d'Aného",
+      "reseaux": "Instagram, TikTok",
+      "abonnes": "7 000+",
+      "liens": [
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@maisondutourismeaneho"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/maisondutourismeaneho"
+        }
+      ]
+    },
+    {
+      "nom": "Mobile Home",
+      "reseaux": "TikTok",
+      "abonnes": "150 000+",
+      "liens": [
+        {
+          "label": "Voir la page",
+          "url": "https://www.tiktok.com/@mobilehometogo16"
+        }
+      ]
+    },
+    {
+      "nom": "Keah Fitness & Gym",
+      "reseaux": "TikTok",
+      "abonnes": "1 900+",
+      "liens": [
+        {
+          "label": "Voir la page",
+          "url": "https://www.tiktok.com/@keah_fitness_gym"
+        }
+      ]
+    },
+    {
+      "nom": "Elixir du Terroir",
+      "reseaux": "TikTok",
+      "abonnes": "67 000+",
+      "liens": [
+        {
+          "label": "Voir la page",
+          "url": "https://www.tiktok.com/@_elizir"
+        }
+      ]
+    }
+  ]
+}

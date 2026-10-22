@@ -1,0 +1,34 @@
+---
+// Icône SVG en ligne. Utilisation : <Icon name="github" />
+import { icons } from '../lib/icons';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = '' } = Astro.props;
+const icon = icons[name];
+if (!icon) throw new Error(`Icône inconnue : "${name}". Ajoute-la dans src/lib/icons.ts.`);
+const stroke = icon.type === 'stroke';
+---
+
+<svg
+  class:list={['icon', className]}
+  viewBox="0 0 24 24"
+  fill={stroke ? 'none' : 'currentColor'}
+  stroke={stroke ? 'currentColor' : undefined}
+  stroke-width={stroke ? 2 : undefined}
+  stroke-linecap={stroke ? 'round' : undefined}
+  stroke-linejoin={stroke ? 'round' : undefined}
+  aria-hidden="true"
+  focusable="false"
+  set:html={icon.body}
+/>
+
+<style>
+  .icon {
+    width: 1.15em;
+    height: 1.15em;
+    flex: none;
+  }
+</style>

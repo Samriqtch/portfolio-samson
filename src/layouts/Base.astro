@@ -1,0 +1,58 @@
+---
+// Squelette commun à toutes les pages : <head>, en-tête et pied de page.
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  theme: 'home' | 'dev' | 'design';
+}
+const { title, description, theme } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content={theme === 'design' ? '#F2B925' : '#141938'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body class={`theme-${theme}`}>
+    <Header current={theme} />
+    <slot />
+    <script>
+      // Charge les fonds des sections quand on s'en approche (économise les données sur téléphone)
+      const sections = document.querySelectorAll<HTMLElement>('[data-bg-lg]');
+      const apply = (el: HTMLElement) => {
+        el.style.setProperty('--bg-lg', `url("${el.dataset.bgLg}")`);
+        el.style.setProperty('--bg-sm', `url("${el.dataset.bgSm}")`);
+      };
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                apply(e.target as HTMLElement);
+                io.unobserve(e.target);
+              }
+            }),
+          { rootMargin: '600px 0px' },
+        );
+        sections.forEach((el) => io.observe(el));
+      } else {
+        sections.forEach(apply);
+      }
+    </script>
+  </body>
+</html>

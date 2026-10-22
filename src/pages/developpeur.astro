@@ -1,0 +1,63 @@
+---
+// Page « Développeur »
+import Base from '../layouts/Base.astro';
+import DevHero from '../components/dev/DevHero.astro';
+import Projets from '../components/dev/Projets.astro';
+import Outils from '../components/dev/Outils.astro';
+import Etapes from '../components/dev/Etapes.astro';
+import Timeline from '../components/shared/Timeline.astro';
+import About from '../components/shared/About.astro';
+import Contact from '../components/shared/Contact.astro';
+import textes from '../data/textes.json';
+import parcours from '../data/parcours-dev.json';
+import contact from '../data/contact.json';
+
+const { apropos, contact: bloc } = textes.dev;
+---
+
+<Base
+  title="Samson Klougan · Développeur web à Lomé"
+  description="Sites web sur mesure et applications de gestion (Laravel, React, Next.js, Flutter) conçus à Lomé par Samson Klougan."
+  theme="dev"
+>
+  <main>
+    <DevHero />
+    <Projets />
+    <Outils />
+
+    <section class="section parcours" id="parcours">
+      <div class="wrap">
+        <h2 class="sec-title">Mon parcours</h2>
+        <Timeline experiences={parcours.experiences} formation={parcours.formation} />
+      </div>
+    </section>
+
+    <Etapes />
+    <About photo={apropos.photo} alt={apropos.alt} intro={apropos.intro} texte={apropos.texte} faits={apropos.faits} />
+    <Contact
+      titre={bloc.titre}
+      texte={bloc.texte}
+      lien={{ label: 'GitHub', url: contact.github, icone: 'github' }}
+      passerelle={{ titre: bloc.passerelle.titre, lien: bloc.passerelle.lien, url: '/graphiste/' }}
+    />
+  </main>
+</Base>
+
+<style>
+  /* Motif « plan d'architecte » derrière le parcours (sur un calque, pour ne pas estomper le texte) */
+  .parcours {
+    isolation: isolate;
+  }
+  .parcours::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(157, 178, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157, 178, 255, 0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+  }
+</style>

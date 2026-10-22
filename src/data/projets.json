@@ -1,0 +1,132 @@
+[
+  {
+    "titre": "Gestion de boutique Mobile Home",
+    "type": "Application",
+    "enCours": false,
+    "description": "Application de gestion pour une boutique de téléphones et accessoires : stock, ventes par vendeur, reprises, acomptes, caisse et clôtures. Un espace administrateur avec rapports et statistiques, un espace boutique pour les enregistrements du quotidien.",
+    "technos": [
+      "Laravel",
+      "PHP",
+      "MySQL",
+      "PWA",
+      "VPS CloudPanel"
+    ],
+    "lien": null,
+    "image": "mobile-home.jpg",
+    "alt": "Tableau de bord rapports et statistiques de l'application Mobile Home"
+  },
+  {
+    "titre": "Keah Fitness & Gym",
+    "type": "Site vitrine",
+    "enCours": false,
+    "description": "Site sur mesure pour une salle de sport à Adidogomé : présentation de la salle, programme Zen Mama by Keah, offre entreprises et réservation de bilan.",
+    "technos": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Netlify"
+    ],
+    "lien": "https://keahfitnessgym.netlify.app",
+    "image": "keah-site.jpg",
+    "alt": "Page d'accueil du site Keah Fitness & Gym"
+  },
+  {
+    "titre": "BloodLink Africa",
+    "type": "Plateforme web",
+    "enCours": false,
+    "description": "Plateforme de gestion des dons de sang au Togo, avec trois espaces distincts : donneurs, hôpitaux et administrateurs.",
+    "technos": [
+      "React",
+      "Multi-utilisateurs",
+      "Authentification",
+      "Tableaux de bord"
+    ],
+    "lien": null,
+    "image": "bloodlink.jpg",
+    "alt": "Écran de connexion de la plateforme BloodLink Africa"
+  },
+  {
+    "titre": "Challenge 100 AH'FA 2026",
+    "type": "Landing page",
+    "enCours": false,
+    "description": "Page de précommande pour une marque de produits d'entretien : compte à rebours, jauge des 100 packs disponibles et commande directe via WhatsApp.",
+    "technos": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "lien": null,
+    "image": "challenge-ahfa.jpg",
+    "alt": "Page du Challenge 100 AH'FA 2026"
+  },
+  {
+    "titre": "Programme O'FAMM",
+    "type": "Site de présentation",
+    "enCours": false,
+    "description": "Site de présentation d'un programme de formation au digital et à l'IA : déroulé, niveaux de récompenses et inscription des participants.",
+    "technos": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "lien": null,
+    "image": "ofamm.jpg",
+    "alt": "Section récompenses du site O'FAMM"
+  },
+  {
+    "titre": "Mibaperty",
+    "type": "Site vitrine",
+    "enCours": false,
+    "description": "Site d'une entreprise agroalimentaire togolaise qui valorise l'huile de palme vierge et le vin de palme : présentation, produits et commande.",
+    "technos": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "lien": null,
+    "image": "mibaperty.jpg",
+    "alt": "Page d'accueil du site Mibaperty"
+  },
+  {
+    "titre": "Site Aného Tourisme",
+    "type": "WordPress",
+    "enCours": false,
+    "description": "Configuration de champs personnalisés, retouches du thème et intégration des circuits et activités pour le site touristique de la ville d'Aného.",
+    "technos": [
+      "WordPress",
+      "ACF",
+      "PHP"
+    ],
+    "lien": null,
+    "image": "aneho-tourisme.jpg",
+    "alt": "Circuits du site Aného Tourisme"
+  },
+  {
+    "titre": "Invitation web de cérémonie",
+    "type": "Mini-site",
+    "enCours": false,
+    "description": "Un faire-part en ligne élégant pour une cérémonie de dot à Lomé : programme, familles, thème floral et confirmation de présence, partagé en un lien sur WhatsApp.",
+    "technos": [
+      "HTML",
+      "CSS",
+      "Responsive"
+    ],
+    "lien": null,
+    "image": "invitation.jpg",
+    "alt": "Accueil du mini-site d'invitation"
+  },
+  {
+    "titre": "Réservations de la Maison du Tourisme d'Aného",
+    "type": "Système d'information",
+    "enCours": true,
+    "description": "Conception d'un système de gestion des réservations, des tickets et des visiteurs, mené dans le cadre de mon Master 2 en Systèmes d'Information.",
+    "technos": [
+      "Analyse & UML",
+      "Base de données",
+      "Web"
+    ],
+    "lien": null,
+    "image": "aneho-tourisme.jpg",
+    "alt": "Site Aného Tourisme, lié au projet de la Maison du Tourisme"
+  }
+]

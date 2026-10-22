@@ -1,0 +1,83 @@
+---
+// Boîte à outils : technologies regroupées par domaine.
+import Icon from '../Icon.astro';
+import { background, lazyBackground } from '../../lib/images';
+import outils from '../../data/outils.json';
+
+const bg = await background('bg-dashboard.jpg', 1400, 800);
+---
+
+<section class="section tools" {...lazyBackground(bg)}>
+  <div class="wrap">
+    <h2 class="sec-title">Ma boîte à outils</h2>
+    <div class="grid">
+      {
+        outils.map((o) => (
+          <div class="cell">
+            <h3>
+              {o.icone && <Icon name={o.icone} />}
+              {o.titre}
+            </h3>
+            <ul>
+              {o.elements.map((e) => (
+                <li>{e}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .tools {
+    background-image:
+      linear-gradient(180deg, var(--indigo) 0%, rgba(20, 25, 56, 0.8) 25%, rgba(20, 25, 56, 0.8) 75%, var(--indigo) 100%),
+      var(--bg-lg);
+    background-size: cover;
+    background-position: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--line);
+  }
+  .cell {
+    padding: 1.6rem 1.4rem;
+    background: rgba(20, 25, 56, 0.9);
+  }
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--safran);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.3rem;
+  }
+  @media (max-width: 860px) {
+    .tools {
+      background-image: linear-gradient(180deg, var(--indigo) 0%, rgba(20, 25, 56, 0.85) 30%, var(--indigo) 100%), var(--bg-sm);
+    }
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 420px) {
+    .cell {
+      padding: 1.2rem 1rem;
+    }
+  }
+</style>

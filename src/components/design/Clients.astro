@@ -1,0 +1,55 @@
+---
+// Liste des clients, sur un mur d'affiches.
+import { background, lazyBackground } from '../../lib/images';
+import clients from '../../data/clients.json';
+
+const bg = await background('bg-posters-dense.jpg');
+---
+
+<section class="section band on-dark" id="clients" {...lazyBackground(bg)}>
+  <div class="wrap">
+    <h2 class="sec-title">Ils m'ont confié leur image</h2>
+    <ul class="clients">
+      {clients.map((c) => <li>{c}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .band {
+    background-image: linear-gradient(180deg, rgba(20, 25, 56, 0.8), rgba(20, 25, 56, 0.88)), var(--bg-lg);
+    background-color: var(--indigo);
+    background-size: cover;
+    background-position: center;
+  }
+  .clients {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
+  }
+  li {
+    font-size: clamp(1.5rem, 4.2vw, 3.6rem);
+    font-weight: 800;
+    font-stretch: 108%;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+  li:nth-child(even) {
+    font-weight: 300;
+    font-stretch: 70%;
+  }
+  li:not(:last-child)::after {
+    content: '✦';
+    margin: 0 0.7em;
+    font-size: 0.4em;
+    vertical-align: middle;
+    color: var(--safran);
+  }
+  @media (max-width: 860px) {
+    .band {
+      background-image: linear-gradient(180deg, rgba(20, 25, 56, 0.84), rgba(20, 25, 56, 0.9)), var(--bg-sm);
+    }
+  }
+</style>

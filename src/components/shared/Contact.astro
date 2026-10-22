@@ -1,0 +1,194 @@
+---
+// Bloc de contact en bas de chaque univers, avec la photo détourée fondue dans le fond.
+import Icon from '../Icon.astro';
+import contact from '../../data/contact.json';
+import { optimized } from '../../lib/images';
+
+interface Props {
+  titre: string;
+  texte: string;
+  /** Troisième bouton : GitHub côté dev, Behance côté graphiste */
+  lien: { label: string; url: string; icone: string };
+  /** Lien vers l'autre univers */
+  passerelle: { titre: string; lien: string; url: string };
+}
+const { titre, texte, lien, passerelle } = Astro.props;
+const photoLg = await optimized('samson-detoure.png', 760, 80);
+const photoSm = await optimized('samson-detoure.png', 420, 75);
+const reseaux = [
+  { label: 'LinkedIn', url: contact.linkedin, icone: 'linkedin' },
+  { label: 'Facebook', url: contact.facebook, icone: 'facebook' },
+  { label: 'Instagram', url: contact.instagram, icone: 'instagram' },
+];
+const annee = new Date().getFullYear();
+---
+
+<section class="contact" id="contact" style={`--photo-lg:url("${photoLg}");--photo-sm:url("${photoSm}")`}>
+  <div class="wrap inner">
+    <h2>{titre}</h2>
+    <p class="lead">{texte}</p>
+
+    <div class="actions">
+      <a class="btn btn-main" href={contact.whatsapp.url} target="_blank" rel="noopener">
+        <Icon name="whatsapp" />WhatsApp {contact.whatsapp.numero}
+      </a>
+      <a class="btn btn-ghost" href={contact.telephone.url}><Icon name="phone" />{contact.telephone.numero}</a>
+      <a class="btn btn-ghost" href={lien.url} target="_blank" rel="noopener"><Icon name={lien.icone} />{lien.label}</a>
+    </div>
+
+    <div class="more">
+      <a class="mail" href={`mailto:${contact.email}`}><Icon name="mail" /><span>{contact.email}</span></a>
+      <ul class="socials" aria-label="Réseaux sociaux">
+        {
+          reseaux.map((r) => (
+            <li>
+              <a href={r.url} target="_blank" rel="noopener">
+                <Icon name={r.icone} />
+                {r.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <a class="crossover" href={passerelle.url}>
+      <strong>{passerelle.titre}</strong>
+      <span>{passerelle.lien}</span>
+    </a>
+
+    <footer class="foot">
+      <span>© {annee} Samson Klougan · Dream Conception</span>
+      <span>Lomé, Togo</span>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    padding-block: clamp(5rem, 12vw, 9rem) clamp(2rem, 5vw, 3rem);
+    background-image:
+      linear-gradient(90deg, var(--bg) 40%, color-mix(in srgb, var(--bg) 55%, transparent) 58%, transparent 78%),
+      linear-gradient(0deg, var(--bg) 0%, transparent 28%),
+      var(--photo-lg);
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 0, right 5% bottom;
+    background-size: auto, auto, auto 90%;
+  }
+  .inner {
+    display: grid;
+    gap: 1.4rem;
+  }
+  h2 {
+    font-size: clamp(2.8rem, 9vw, 8.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 900;
+    max-width: 9ch;
+  }
+  :global(.theme-dev) h2 {
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: -0.07em;
+  }
+  :global(.theme-design) h2 {
+    font-stretch: 125%;
+    max-width: 8ch;
+  }
+  .lead,
+  .actions,
+  .more {
+    max-width: 58%;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.6rem;
+  }
+  .more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem 1.6rem;
+  }
+  .mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 0.15rem;
+    overflow-wrap: anywhere;
+  }
+  .socials {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: var(--soft);
+    transition: background-color 0.25s, color 0.25s;
+  }
+  .socials a:hover {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  .crossover {
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.6rem 1.8rem;
+    border-radius: 18px;
+    text-decoration: none;
+    background: var(--accent);
+    color: var(--accent-fg);
+    position: relative;
+  }
+  .crossover strong {
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    font-stretch: 115%;
+    letter-spacing: -0.02em;
+  }
+  .crossover span {
+    font-weight: 600;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.85rem;
+    opacity: 0.75;
+    padding-top: 0.5rem;
+  }
+
+  @media (max-width: 860px) {
+    .contact {
+      padding-top: 300px;
+      background-image: linear-gradient(180deg, color-mix(in srgb, var(--bg) 25%, transparent) 0%, var(--bg) 330px), var(--photo-sm);
+      background-position: 0 0, center top 1rem;
+      background-size: auto, auto 300px;
+    }
+    .lead,
+    .actions,
+    .more {
+      max-width: none;
+    }
+  }
+</style>

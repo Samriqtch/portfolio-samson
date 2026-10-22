@@ -1,0 +1,218 @@
+/* =========================================================
+   Styles communs à tout le site
+   Les styles propres à chaque section sont dans son composant (src/components).
+   ========================================================= */
+
+@import '@fontsource-variable/archivo/standard.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+/* Palette et polices */
+:root {
+  --indigo: #141938;
+  --indigo-2: #1f2654;
+  --indigo-3: #2d3775;
+  --nuit: #0a0d22;
+  --safran: #f2b925;
+  --safran-2: #ffd25e;
+  --craie: #f5f4f0;
+  --ciel: #9db2ff;
+
+  --sans: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  /* Marge intérieure des côtés, qui respecte les encoches des téléphones */
+  --pad: clamp(1.25rem, 4vw, 3.5rem);
+  --gutter-l: max(var(--pad), env(safe-area-inset-left, 0px));
+  --gutter-r: max(var(--pad), env(safe-area-inset-right, 0px));
+  --section-y: clamp(4rem, 10vw, 8rem);
+  --ease: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* Couleurs selon l'univers : chaque composant utilise ces variables */
+.theme-home,
+.theme-dev {
+  --bg: var(--indigo);
+  --fg: var(--craie);
+  --accent: var(--safran);
+  --accent-fg: var(--indigo);
+  --line: rgba(245, 244, 240, 0.18);
+  --soft: rgba(245, 244, 240, 0.08);
+  --date: var(--ciel);
+  color-scheme: dark;
+}
+.theme-design {
+  --bg: var(--safran);
+  --fg: var(--indigo);
+  --accent: var(--indigo);
+  --accent-fg: var(--safran);
+  --line: rgba(20, 25, 56, 0.25);
+  --soft: rgba(20, 25, 56, 0.08);
+  --date: var(--indigo-3);
+  color-scheme: light;
+}
+/* Bande sombre à l'intérieur de la partie graphiste */
+.on-dark {
+  --fg: var(--craie);
+  --accent: var(--safran);
+  --accent-fg: var(--indigo);
+  --line: rgba(245, 244, 240, 0.25);
+  --soft: rgba(245, 244, 240, 0.1);
+  --date: var(--safran);
+  color: var(--fg);
+}
+
+/* Fonds de section : rien tant que l'image n'est pas chargée (voir Base.astro) */
+[data-bg-lg] {
+  --bg-lg: none;
+  --bg-sm: none;
+}
+
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+body {
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Mise en page */
+.wrap {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-left: var(--gutter-l);
+  padding-right: var(--gutter-r);
+}
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+.sec-title {
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  max-width: 16ch;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  text-wrap: balance;
+}
+.lead {
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  line-height: 1.5;
+  max-width: 46ch;
+}
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+.sec-head .sec-title {
+  margin-bottom: 0;
+}
+.sec-head .lead {
+  max-width: 36ch;
+}
+
+/* Boutons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  transition: transform 0.25s, background-color 0.25s, color 0.25s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn-main {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.btn-ghost {
+  border-color: currentColor;
+}
+.btn .icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* Étiquettes de technos */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+.tags li {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+}
+
+/* Transition douce entre les pages (navigateurs récents, sans JavaScript) */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  @view-transition {
+    navigation: none;
+  }
+}

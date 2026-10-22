@@ -1,0 +1,29 @@
+[
+  {
+    "titre": "Mobile Home",
+    "texte": "Spot en motion design",
+    "video": "mobile-home-spot.mp4",
+    "poster": "mobile-home-spot-poster.jpg",
+    "lien": null,
+    "image": null,
+    "alt": "Spot animé Mobile Home"
+  },
+  {
+    "titre": "Mobile Home",
+    "texte": "Présentation produit, tournage et montage",
+    "video": null,
+    "poster": null,
+    "lien": "https://www.facebook.com/share/r/1Bmm3NfEKp/",
+    "image": "reel-mobilehome.jpg",
+    "alt": "Présentation d'un smartphone en boutique pour Mobile Home"
+  },
+  {
+    "titre": "Maison du Tourisme d'Aného",
+    "texte": "Carnaval Bakatue Anezan, tournage et montage",
+    "video": null,
+    "poster": null,
+    "lien": "https://www.facebook.com/share/r/1KFXWcb6yb/",
+    "image": "reel-bakatue.jpg",
+    "alt": "Fanfare du Carnaval Bakatue Anezan à Aného"
+  }
+]

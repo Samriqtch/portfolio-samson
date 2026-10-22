@@ -1,0 +1,182 @@
+---
+// Haut de la page graphiste : des colonnes d'affiches qui défilent lentement sur toute la largeur.
+// Les bandes d'affiches sont les images bg-rail-1.jpg à bg-rail-6.jpg (une colonne d'affiches empilées).
+import { img, optimized } from '../../lib/images';
+import textes from '../../data/textes.json';
+
+const strips = await Promise.all(
+  [1, 2, 3, 4, 5, 6].map(async (n) => {
+    const meta = img(`bg-rail-${n}.jpg`);
+    return { url: await optimized(`bg-rail-${n}.jpg`, 320, 66), ratio: meta.height / meta.width };
+  }),
+);
+// Ordre des colonnes de gauche à droite (numéro de bande) et vitesse de chacune, en secondes
+const columns = [4, 1, 5, 2, 6, 3, 4, 1, 5, 2].map((n, i) => ({
+  ...strips[n - 1],
+  duration: [62, 74, 58, 80, 66, 70, 56, 76, 64, 72][i],
+  delay: -((i * 13) % 50),
+  down: i % 2 === 1,
+}));
+const { intro, roles } = textes.design;
+---
+
+<section class="hero">
+  <div class="rails" aria-hidden="true">
+    <div class="rails-inner">
+      {
+        columns.map((c) => (
+          <div
+            class:list={['rail', { down: c.down }]}
+            style={`--strip:url("${c.url}");--ratio:${c.ratio.toFixed(5)};--dur:${c.duration}s;--delay:${c.delay}s`}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="wrap content">
+    <h1>Samson<span>Klougan</span></h1>
+    <div class="intro">
+      <p class="lead">{intro}</p>
+      <ul class="roles">
+        {roles.map((r) => <li>{r}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    min-height: min(100svh, 980px);
+    display: grid;
+    align-items: end;
+    padding-block: 7rem clamp(3rem, 6vw, 5rem);
+  }
+  .rails {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .rails-inner {
+    position: absolute;
+    inset: -14% -6%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    transform: rotate(-4deg);
+  }
+  .rails::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(0deg, var(--safran) 0%, rgba(242, 185, 37, 0) 22%),
+      linear-gradient(90deg, rgba(242, 185, 37, 0.92) 0%, rgba(242, 185, 37, 0.82) 45%, rgba(242, 185, 37, 0.62) 100%);
+  }
+  .rail {
+    --w: 220px;
+    --loop: calc(var(--w) * var(--ratio));
+    position: relative;
+    flex: none;
+    width: var(--w);
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+  /* La bande est deux fois plus longue que nécessaire et glisse d'une longueur : la boucle ne se voit pas */
+  .rail::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: calc(100% + var(--loop));
+    background: var(--strip) 0 0 / 100% auto repeat-y;
+    animation: rail-up var(--dur) linear var(--delay) infinite;
+    will-change: transform;
+  }
+  .rail.down::before {
+    animation-name: rail-down;
+  }
+  @keyframes rail-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-1 * var(--loop)));
+    }
+  }
+  @keyframes rail-down {
+    from {
+      transform: translateY(calc(-1 * var(--loop)));
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  h1 {
+    font-size: clamp(3rem, 12.5vw, 12rem);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    font-weight: 900;
+    font-stretch: 125%;
+  }
+  h1 span {
+    display: block;
+    font-weight: 300;
+    font-stretch: 62%;
+    letter-spacing: -0.03em;
+  }
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    align-items: end;
+  }
+  .lead {
+    font-weight: 500;
+  }
+  .roles {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  .roles li {
+    border: 1.5px solid var(--indigo);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: rgba(242, 185, 37, 0.7);
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      min-height: auto;
+      padding-top: 6.5rem;
+    }
+    .rail {
+      --w: 140px;
+    }
+    /* Moins de colonnes sur téléphone : moins d'images à charger et à animer */
+    .rail:nth-child(n + 4) {
+      display: none;
+    }
+    .rails::after {
+      background: linear-gradient(0deg, var(--safran) 0%, rgba(242, 185, 37, 0.86) 40%, rgba(242, 185, 37, 0.72) 100%);
+    }
+    .intro {
+      grid-template-columns: 1fr;
+    }
+    .roles {
+      justify-content: flex-start;
+    }
+  }
+</style>

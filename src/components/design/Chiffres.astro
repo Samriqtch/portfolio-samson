@@ -1,0 +1,100 @@
+---
+// Chiffres clés, sur une photo du carnaval. Les nombres s'animent quand on arrive dessus.
+import { background, lazyBackground } from '../../lib/images';
+import chiffres from '../../data/chiffres.json';
+
+const bg = await background('bg-carnaval.jpg', 900, 600);
+const format = (n: number) => n.toLocaleString('fr-FR').replace(/ /g, ' ');
+---
+
+<section class="section stats-band on-dark" aria-label="Quelques chiffres" {...lazyBackground(bg)}>
+  <div class="wrap">
+    <div class="stats">
+      {
+        chiffres.map((c) => (
+          <div class="stat">
+            <strong data-count={c.valeur} data-suffix={c.suffixe}>
+              {format(c.valeur)}
+              {c.suffixe}
+            </strong>
+            <span>{c.texte}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const els = document.querySelectorAll<HTMLElement>('[data-count]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (els.length && !reduce && 'IntersectionObserver' in window) {
+    const fmt = (n: number) => n.toLocaleString('fr-FR').replace(/ /g, ' ');
+    const run = (el: HTMLElement) => {
+      const target = Number(el.dataset.count);
+      const suffix = el.dataset.suffix ?? '';
+      const start = performance.now();
+      const step = (now: number) => {
+        const p = Math.min(1, (now - start) / 1400);
+        el.textContent = fmt(Math.round(target * (1 - Math.pow(1 - p, 3)))) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            run(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.6 },
+    );
+    els.forEach((el) => io.observe(el));
+  }
+</script>
+
+<style>
+  .stats-band {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+    background-image: linear-gradient(180deg, rgba(20, 25, 56, 0.84), rgba(20, 25, 56, 0.9)), var(--bg-lg);
+    background-color: var(--indigo);
+    background-size: cover;
+    background-position: center;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1rem, 2vw, 2rem);
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--line);
+  }
+  strong {
+    display: block;
+    white-space: nowrap;
+    color: var(--safran);
+    font-size: clamp(2.4rem, 5.2vw, 4.8rem);
+    line-height: 0.9;
+    font-weight: 900;
+    font-stretch: 118%;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  span {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    max-width: 20ch;
+  }
+  @media (max-width: 860px) {
+    .stats-band {
+      background-image: linear-gradient(180deg, rgba(20, 25, 56, 0.86), rgba(20, 25, 56, 0.9)), var(--bg-sm);
+    }
+    .stats {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 2rem;
+    }
+  }
+</style>

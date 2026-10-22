@@ -1,0 +1,77 @@
+[
+  {
+    "titre": "front",
+    "icone": "layout-template",
+    "elements": [
+      "HTML, CSS, JavaScript",
+      "Angular, React, Next.js",
+      "Bootstrap",
+      "Responsive design"
+    ]
+  },
+  {
+    "titre": "back",
+    "icone": "server",
+    "elements": [
+      "PHP, Laravel",
+      "Node.js, Nest.js",
+      "Python, Java, C",
+      "API REST"
+    ]
+  },
+  {
+    "titre": "mobile",
+    "icone": "smartphone",
+    "elements": [
+      "Flutter",
+      "PWA installables",
+      "Applis sur tablette"
+    ]
+  },
+  {
+    "titre": "données",
+    "icone": "database",
+    "elements": [
+      "MySQL",
+      "PostgreSQL",
+      "Supabase"
+    ]
+  },
+  {
+    "titre": "conception",
+    "icone": "compass",
+    "elements": [
+      "UML, Merise",
+      "Méthode Agile",
+      "Figma, Draw.io",
+      "Cahier des charges"
+    ]
+  },
+  {
+    "titre": "outils",
+    "icone": "git-branch",
+    "elements": [
+      "Git, GitHub, GitLab",
+      "WordPress, ACF",
+      "Google Workspace"
+    ]
+  },
+  {
+    "titre": "mise en ligne",
+    "icone": "cloud-upload",
+    "elements": [
+      "Netlify, Vercel",
+      "VPS Hostinger",
+      "CloudPanel"
+    ]
+  },
+  {
+    "titre": "langues",
+    "icone": "languages",
+    "elements": [
+      "Français, courant",
+      "Anglais, niveau B1",
+      "Éwé, langue maternelle"
+    ]
+  }
+]
