@@ -1,8 +1,9 @@
 ---
-// Bloc de contact en bas de chaque univers, avec la photo détourée fondue dans le fond.
+// Bloc de contact en bas de chaque univers, avec une vitrine de réalisations à droite.
 import Icon from '../Icon.astro';
 import contact from '../../data/contact.json';
-import { optimized } from '../../lib/images';
+import { Image } from 'astro:assets';
+import { img } from '../../lib/images';
 
 interface Props {
   titre: string;
@@ -11,10 +12,13 @@ interface Props {
   lien: { label: string; url: string; icone: string };
   /** Lien vers l'autre univers */
   passerelle: { titre: string; lien: string; url: string };
+  /**
+   * Vitrine à droite : 3 images de src/assets/images.
+   * « affiches » = affiches en éventail (la 1re au centre), « ecrans » = captures de sites (la 1re en grand).
+   */
+  vitrine: { type: 'affiches' | 'ecrans'; images: [string, string, string] };
 }
-const { titre, texte, lien, passerelle } = Astro.props;
-const photoLg = await optimized('samson-detoure.png', 760, 80);
-const photoSm = await optimized('samson-detoure.png', 420, 75);
+const { titre, texte, lien, passerelle, vitrine } = Astro.props;
 const reseaux = [
   { label: 'LinkedIn', url: contact.linkedin, icone: 'linkedin' },
   { label: 'Facebook', url: contact.facebook, icone: 'facebook' },
@@ -23,7 +27,14 @@ const reseaux = [
 const annee = new Date().getFullYear();
 ---
 
-<section class="contact" id="contact" style={`--photo-lg:url("${photoLg}");--photo-sm:url("${photoSm}")`}>
+<section class="contact" id="contact">
+  <div class={`showcase ${vitrine.type}`} aria-hidden="true">
+    {
+      vitrine.images.map((name, i) => (
+        <Image class={`v v${i + 1}`} src={img(name)} alt="" widths={[360, 720]} sizes="(max-width: 860px) 60vw, 26vw" loading="lazy" />
+      ))
+    }
+  </div>
   <div class="wrap inner">
     <h2>{titre}</h2>
     <p class="lead">{texte}</p>
@@ -67,14 +78,71 @@ const annee = new Date().getFullYear();
 <style>
   .contact {
     position: relative;
+    overflow: hidden;
     padding-block: clamp(5rem, 12vw, 9rem) clamp(2rem, 5vw, 3rem);
-    background-image:
-      linear-gradient(90deg, var(--bg) 40%, color-mix(in srgb, var(--bg) 55%, transparent) 58%, transparent 78%),
-      linear-gradient(0deg, var(--bg) 0%, transparent 28%),
-      var(--photo-lg);
-    background-repeat: no-repeat;
-    background-position: 0 0, 0 0, right 5% bottom;
-    background-size: auto, auto, auto 90%;
+  }
+
+  /* Vitrine de réalisations */
+  .showcase {
+    position: absolute;
+    right: max(var(--gutter-r), 4vw);
+    top: clamp(5rem, 12vw, 9rem);
+    width: min(40vw, 560px);
+    aspect-ratio: 7 / 6;
+    pointer-events: none;
+  }
+  .showcase :global(.v) {
+    position: absolute;
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  }
+  /* Affiches en éventail : la 1re au centre, devant */
+  .affiches :global(.v) {
+    border-radius: 12px;
+  }
+  .affiches :global(.v1) {
+    width: 48%;
+    left: 26%;
+    top: 0;
+    z-index: 2;
+    transform: rotate(-1deg);
+  }
+  .affiches :global(.v2) {
+    width: 44%;
+    left: 2%;
+    top: 12%;
+    transform: rotate(-9deg);
+  }
+  .affiches :global(.v3) {
+    width: 44%;
+    right: 2%;
+    top: 10%;
+    transform: rotate(8deg);
+  }
+  /* Écrans de sites : le 1er en grand, les deux autres devant */
+  .ecrans :global(.v) {
+    border: 8px solid var(--indigo-3);
+    border-radius: 14px;
+    aspect-ratio: 16 / 10;
+  }
+  .ecrans :global(.v1) {
+    width: 86%;
+    left: 0;
+    top: 0;
+    border-width: 10px;
+  }
+  .ecrans :global(.v2) {
+    width: 62%;
+    right: 0;
+    top: 46%;
+    z-index: 2;
+  }
+  .ecrans :global(.v3) {
+    width: 40%;
+    left: 6%;
+    top: 60%;
+    z-index: 3;
   }
   .inner {
     display: grid;
@@ -180,10 +248,14 @@ const annee = new Date().getFullYear();
 
   @media (max-width: 860px) {
     .contact {
-      padding-top: 300px;
-      background-image: linear-gradient(180deg, color-mix(in srgb, var(--bg) 25%, transparent) 0%, var(--bg) 330px), var(--photo-sm);
-      background-position: 0 0, center top 1rem;
-      background-size: auto, auto 300px;
+      padding-top: 4.5rem;
+    }
+    .showcase {
+      position: relative;
+      right: auto;
+      top: auto;
+      width: min(100% - var(--gutter-l) - var(--gutter-r), 420px);
+      margin: 0 auto 2.5rem;
     }
     .lead,
     .actions,
